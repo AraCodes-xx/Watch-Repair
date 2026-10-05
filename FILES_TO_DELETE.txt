@@ -1,0 +1,75 @@
+╔════════════════════════════════════════════════════════════╗
+║          FILES TO DELETE BEFORE TRANSFER                   ║
+╚════════════════════════════════════════════════════════════╝
+
+📁 DELETE THESE FILES (Not needed anymore):
+
+In database/ folder:
+  ❌ schema.sql
+  ❌ add_payment_status.sql
+  ❌ add_watch_type.sql
+  ❌ migrate_booking_improvements.sql
+
+In root folder:
+  ❌ DATE_TIME_SLOT_ENHANCEMENT.md
+  ❌ PAYMENT_DETAILS_FEATURE.md
+  ❌ ID_REMOVAL_COMPLETE.md
+  ❌ BOOKING_REFERENCE_SYSTEM.md (if exists)
+  ❌ FILES_TO_DELETE.txt (this file - delete after reading)
+
+✅ KEEP THESE FILES:
+
+In database/ folder:
+  ✅ COMPLETE_DATABASE.sql (THE ONLY SQL FILE NEEDED!)
+
+In root folder:
+  ✅ TRANSFER_GUIDE.md (Instructions for your classmate)
+
+╔════════════════════════════════════════════════════════════╗
+║          BEFORE TRANSFER - UPDATE CONFIG FILES             ║
+╚════════════════════════════════════════════════════════════╝
+
+📝 EDIT: config/database.php
+
+CHANGE THIS:
+  define('DB_HOST', 'localhost:8080');
+
+TO THIS:
+  define('DB_HOST', 'localhost');
+
+---
+
+📝 EDIT: config/config.php
+
+CHANGE THIS:
+  define('SITE_URL', 'http://localhost:8080/repair_shop');
+
+TO THIS:
+  define('SITE_URL', 'http://localhost/repair_shop');
+
+╔════════════════════════════════════════════════════════════╗
+║          TRANSFER STEPS (QUICK VERSION)                    ║
+╚════════════════════════════════════════════════════════════╝
+
+1. Delete files listed above ✓
+2. Update config files ✓
+3. Copy entire repair_shop folder
+4. Give to classmate (USB/Cloud/Email)
+
+CLASSMATE STEPS:
+1. Install XAMPP (if needed)
+2. Start Apache + MySQL
+3. Copy folder to C:\xampp\htdocs\
+4. Import database/COMPLETE_DATABASE.sql in phpMyAdmin
+5. Access: http://localhost/repair_shop
+6. Login: admin / password
+
+╔════════════════════════════════════════════════════════════╗
+║          NEED HELP?                                        ║
+╚════════════════════════════════════════════════════════════╝
+
+Read: TRANSFER_GUIDE.md (detailed instructions)
+
+Default Admin Login:
+  Username: admin
+  Password: password

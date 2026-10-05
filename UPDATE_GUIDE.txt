@@ -1,0 +1,212 @@
+================================================================================
+WATCH REPAIR SHOP - UPDATE GUIDE
+================================================================================
+
+RECENT UPDATES:
+================================================================================
+
+1. UNIFIED LOGIN SYSTEM
+   - Single login page for both users and admins
+   - Location: http://localhost:8080/repair_shop/login.php
+   - Admin login: Use username (admin)
+   - Customer login: Use email address
+
+2. USER MANAGEMENT IN ADMIN PANEL
+   - View all registered users
+   - View user details and booking history
+   - Edit user information
+   - Delete users
+   - Access: Admin Panel → Users
+
+3. WATCH TYPE SELECTION
+   - Added watch type dropdown in booking form
+   - 11 different watch types available:
+     * Mechanical Watch
+     * Automatic Watch
+     * Quartz Watch
+     * Digital Watch
+     * Smartwatch
+     * Chronograph
+     * Diving Watch
+     * Pocket Watch
+     * Luxury/Designer Watch
+     * Vintage Watch
+     * Other
+
+4. CALENDAR FIX
+   - Fixed calendar grid alignment
+   - Dates now display properly in 7-column grid
+   - Better visual layout
+
+================================================================================
+DATABASE UPDATE REQUIRED
+================================================================================
+
+If you already created the database before these updates, you need to add
+the watch_type column to the bookings table.
+
+OPTION 1 - Run Migration Script:
+1. Open phpMyAdmin: http://localhost:8080/phpmyadmin
+2. Select "watch_repair_shop" database
+3. Click "SQL" tab
+4. Copy content from: database/add_watch_type.sql
+5. Paste and click "Go"
+
+OPTION 2 - Manual SQL:
+Run this SQL command:
+ALTER TABLE bookings ADD COLUMN watch_type VARCHAR(50) AFTER timeslot_id;
+
+OPTION 3 - Fresh Install:
+1. Drop existing database
+2. Re-run database/schema.sql (includes watch_type column)
+
+================================================================================
+WHAT'S NEW IN BOOKING FORM
+================================================================================
+
+The booking form now has 7 steps (previously 6):
+
+1. Select Service
+2. Select Date (with fixed calendar grid)
+3. Select Time Slot
+4. Watch Type (NEW!)
+5. Describe the Problem
+6. Service Address
+7. Payment Information
+
+================================================================================
+HOMEPAGE BEHAVIOR
+================================================================================
+
+When users are logged in:
+- Homepage still shows all content (services, reviews, contact)
+- Navigation shows "Dashboard" and "Logout" links
+- "Book Now" button goes directly to booking page
+- All features remain accessible
+
+When users are NOT logged in:
+- Homepage shows all content
+- Navigation shows "Login" button
+- "Book Now" button redirects to login page
+
+================================================================================
+ADMIN PANEL UPDATES
+================================================================================
+
+New Menu Items:
+- Users (between Technicians and Time Slots)
+
+Dashboard Updates:
+- Added "Registered Users" statistics card
+- Shows total number of registered customers
+- "View All" button to user management
+
+Booking Details:
+- Now displays watch type (if provided)
+- Shows in both admin and user booking views
+
+================================================================================
+TESTING THE UPDATES
+================================================================================
+
+1. Test Unified Login:
+   - Go to: http://localhost:8080/repair_shop/login.php
+   - Try admin login: admin / password
+   - Try customer login: your email / your password
+
+2. Test Watch Type Selection:
+   - Login as customer
+   - Go to "Book Service"
+   - Fill in steps 1-3
+   - Select a watch type from dropdown (step 4)
+   - Complete booking
+
+3. Test Calendar:
+   - Go to booking page
+   - Calendar should show dates in proper 7-column grid
+   - Sunday column should be on the left
+   - All dates should be properly aligned
+
+4. Test User Management:
+   - Login as admin
+   - Click "Users" in navigation
+   - View user list
+   - Click "View" to see user details
+   - Click "Edit" to modify user info
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "Unknown column 'watch_type'" error
+Solution: Run the database migration (see DATABASE UPDATE section above)
+
+Problem: Calendar dates still misaligned
+Solution: Clear browser cache (Ctrl+F5) and reload page
+
+Problem: Can't access unified login
+Solution: Check that Apache is running on port 8080
+
+Problem: Old login pages redirect
+Solution: This is normal - old URLs redirect to new unified login
+
+================================================================================
+FILE CHANGES
+================================================================================
+
+New Files:
+- /login.php (unified login page)
+- /admin/view_users.php
+- /admin/view_user_details.php
+- /admin/edit_user.php
+- /admin/delete_user.php
+- /database/add_watch_type.sql
+- /UPDATE_GUIDE.txt (this file)
+
+Modified Files:
+- /user/booking.php (added watch type, fixed calendar)
+- /user/login.php (redirects to unified login)
+- /admin/login.php (redirects to unified login)
+- /admin/dashboard.php (added users menu and stats)
+- /admin/edit_booking.php (displays watch type)
+- /user/view_booking.php (displays watch type)
+- /database/schema.sql (added watch_type column)
+- /config/config.php (updated port to 8080)
+- /index.php (updated navigation for logged-in users)
+
+================================================================================
+CONFIGURATION
+================================================================================
+
+Current Settings:
+- Port: 8080
+- Site URL: http://localhost:8080/repair_shop
+- Database: watch_repair_shop
+- Admin Login: admin / password
+
+To change port:
+Edit config/config.php:
+define('SITE_URL', 'http://localhost:YOUR_PORT/repair_shop');
+
+================================================================================
+BACKUP REMINDER
+================================================================================
+
+Before making any updates:
+1. Backup your database:
+   - phpMyAdmin → Export → Go
+2. Backup your files:
+   - Copy entire repair_shop folder
+
+================================================================================
+SUPPORT
+================================================================================
+
+If you encounter issues:
+1. Check this UPDATE_GUIDE.txt
+2. Review INSTALLATION.txt
+3. Check README.md
+4. Verify database migration was successful
+5. Clear browser cache
+
+================================================================================
